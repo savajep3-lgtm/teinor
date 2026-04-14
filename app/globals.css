@@ -1,0 +1,142 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   ESTILOS GLOBALES — TEINOR (Light mode base)
+   ============================================================ */
+
+@layer base {
+  * {
+    @apply border-superficie-borde;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-superficie text-tinta font-sans antialiased;
+  }
+
+  ::selection {
+    @apply bg-marca-purpura/20 text-marca-purpura;
+  }
+
+  /* Barra de desplazamiento fina y elegante */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-superficie-suave;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-superficie-borde rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-tinta-claro;
+  }
+}
+
+@layer components {
+  /* ─── Texto con degradado de marca (uso reservado) ─────────────── */
+  .texto-gradiente {
+    @apply bg-gradiente-marca bg-clip-text text-transparent;
+    background-size: 200% auto;
+  }
+
+  .texto-gradiente-animado {
+    @apply bg-gradiente-marca bg-clip-text text-transparent;
+    background-size: 200% auto;
+    animation: gradienteMover 6s ease infinite;
+  }
+
+  /* ─── Tarjeta base sobre fondo claro ───────────────────────────── */
+  .tarjeta {
+    @apply bg-superficie-tarjeta border border-superficie-borde rounded-2xl shadow-tarjeta transition-all duration-500;
+  }
+  .tarjeta-interactiva {
+    @apply tarjeta hover:shadow-tarjeta-hover hover:-translate-y-1 hover:border-marca-purpura/30;
+  }
+
+  /* ─── Vidrio (para sobre fondos oscuros: hero, footer) ─────────── */
+  .vidrio-oscuro {
+    @apply bg-white/[0.05] backdrop-blur-xl border border-white/[0.10];
+  }
+
+  /* ─── Patrón de cuadrícula sutil (decoración) ──────────────────── */
+  .patron-rejilla-claro {
+    background-image:
+      linear-gradient(rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  .patron-rejilla-oscuro {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  .patron-puntos {
+    background-image: radial-gradient(
+      circle,
+      rgba(15, 23, 42, 0.06) 1px,
+      transparent 1px
+    );
+    background-size: 22px 22px;
+  }
+
+  /* ─── Borde con degradado de marca (solo elementos especiales) ── */
+  .borde-marca {
+    position: relative;
+  }
+  .borde-marca::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 2px;
+    border-radius: inherit;
+    background: linear-gradient(
+      135deg,
+      #06b6d4,
+      #7c3aed,
+      #ec4899
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+}
+
+@layer utilities {
+  .equilibrio-texto {
+    text-wrap: balance;
+  }
+
+  .pretty-texto {
+    text-wrap: pretty;
+  }
+
+  .sin-barra-scroll::-webkit-scrollbar {
+    display: none;
+  }
+  .sin-barra-scroll {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .menu-movil-abierto .boton-whatsapp-flotante {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(12px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+}
